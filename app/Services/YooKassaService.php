@@ -22,7 +22,7 @@ class YooKassaService
     {
         $this->client = new Client;
         $this->client->setAuth(
-            (string) config('services.yookassa.shop_id'),
+            config('services.yookassa.shop_id'),
             (string) config('services.yookassa.secret_key'),
         );
     }
