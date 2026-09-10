@@ -107,12 +107,12 @@ class DonationPaymentService
         } while (DonationPayment::query()->where('uuid', $paymentUuid)->exists());
 
         $payment = DonationPayment::query()->create([
-            'uuid' => $paymentUuid,
+            'uuid'      => $paymentUuid,
             'user_uuid' => $userUuid,
-            'app' => $this->donationAppResolver->resolve($app, $userUuid),
-            'amount' => $tier['amount'],
-            'months' => $tier['months'],
-            'status' => PaymentStatus::Pending,
+            'app'       => $this->donationAppResolver->resolve($app, $userUuid),
+            'amount'    => $tier['amount'],
+            'months'    => $tier['months'],
+            'status'    => PaymentStatus::Pending,
         ]);
 
         $yooKassaPayment = $this->yooKassaService->createDonationPayment($payment, $paymentUuid);
@@ -138,12 +138,12 @@ class DonationPaymentService
         } while (DonationPayment::query()->where('uuid', $paymentUuid)->exists());
 
         $payment = DonationPayment::query()->create([
-            'uuid' => $paymentUuid,
+            'uuid'      => $paymentUuid,
             'user_uuid' => $userUuid,
-            'app' => $this->donationAppResolver->resolve($app, $userUuid),
-            'amount' => $tier['amount'],
-            'months' => $tier['months'],
-            'status' => PaymentStatus::Pending,
+            'app'       => $this->donationAppResolver->resolve($app, $userUuid),
+            'amount'    => $tier['amount'],
+            'months'    => $tier['months'],
+            'status'    => PaymentStatus::Pending,
         ]);
 
         $yooKassaPayment = $this->yooKassaService->createDonationSbpPayment($payment, $paymentUuid);
@@ -277,9 +277,9 @@ class DonationPaymentService
     ): array {
         $response = [
             'payment_uuid' => $payment->uuid,
-            'status' => $payment->status->value,
-            'amount' => $payment->amount,
-            'months' => $payment->months,
+            'status'       => $payment->status->value,
+            'amount'       => $payment->amount,
+            'months'       => $payment->months,
         ];
 
         if ($payment->status === PaymentStatus::Succeeded && $user?->ad_free_until !== null) {

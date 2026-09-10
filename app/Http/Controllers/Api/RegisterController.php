@@ -28,9 +28,9 @@ class RegisterController extends Controller
             // Сохраняем только UUID в таблицу users
             // Используем минимальные значения для обязательных полей
             DB::table('users')->insert([
-                'uuid' => $uuid,
-                'name' => 'user_' . substr($uuid, 0, 8), // Генерируем имя из UUID
-                'email' => $uuid . '@temp.local', // Временный email на основе UUID
+                'uuid'     => $uuid,
+                'name'     => 'user_' . substr($uuid, 0, 8), // Генерируем имя из UUID
+                'email'    => $uuid . '@temp.local', // Временный email на основе UUID
                 'password' => Hash::make(Str::random(32)), // Случайный пароль
             ]);
 
