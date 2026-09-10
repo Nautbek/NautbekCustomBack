@@ -57,7 +57,7 @@ class UserFeedback extends Model
      * @param string $visitIp
      * @param string $app
      * @param string $text
-     * @param int|null $uuid
+     * @param string|null $uuid
      * @return void
      */
     public static function saveFeedback(string $visitIp, string $app, string $text, ?string $uuid = null): void
