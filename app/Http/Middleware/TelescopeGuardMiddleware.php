@@ -20,7 +20,7 @@ class TelescopeGuardMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!in_array($request->getClientIp(), self::ACCESS_IPS)) {
+        if (app()->isProduction() && !in_array($request->getClientIp(), self::ACCESS_IPS)) {
             return new Response('Only for admin access.', Response::HTTP_FORBIDDEN);
         }
         return $next($request);
