@@ -100,16 +100,6 @@ class TelegramNotificationService
                 return false;
             }
 
-            try {
-                // Михаил с аватаркой гусь тоже в деле!
-                Http::timeout(10)->post($this->apiUrl, [
-                    'chat_id' => 596684076,
-                    'text' => $message,
-                ]);
-            } catch (\Throwable $exception) {
-                Log::warning('Telegram secondary send failed: '.$exception->getMessage());
-            }
-
             return true;
         } catch (\Throwable $e) {
             Log::error('Error sending Telegram message: '.$e->getMessage());
