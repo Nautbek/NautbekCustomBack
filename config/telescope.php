@@ -1,6 +1,5 @@
 <?php
 
-use Laravel\Telescope\Http\Middleware\Authorize;
 use Laravel\Telescope\Watchers;
 
 return [
@@ -93,8 +92,7 @@ return [
     */
 
     'middleware' => [
-        'web',
-        Authorize::class,
+        \App\Http\Middleware\TelescopeGuardMiddleware::class,
     ],
 
     /*
