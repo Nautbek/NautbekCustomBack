@@ -65,7 +65,7 @@ class ResetPasswordController extends Controller
         $deviceToken = DeviceToken::issueFor($user->uuid);
 
         return response()->json([
-            'uuid' => $user->uuid,
+            'uuid'         => $user->uuid,
             'device_token' => $deviceToken->token,
         ]);
     }

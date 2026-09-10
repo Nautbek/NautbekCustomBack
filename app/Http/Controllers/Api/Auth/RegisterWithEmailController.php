@@ -39,6 +39,8 @@ class RegisterWithEmailController extends Controller
 
         if (! empty($validated['uuid'])) {
             $uuid = $request->string('uuid')->toString();
+
+            /** @var User|null $user */
             $user = User::query()->where('uuid', $uuid)->first();
 
             if ($user === null) {
@@ -58,9 +60,9 @@ class RegisterWithEmailController extends Controller
             } while (User::query()->where('uuid', $uuid)->exists());
 
             DB::table('users')->insert([
-                'uuid' => $uuid,
-                'name' => 'user_'.substr($uuid, 0, 8),
-                'email' => $email,
+                'uuid'     => $uuid,
+                'name'     => 'user_'.substr($uuid, 0, 8),
+                'email'    => $email,
                 'password' => Hash::make($password),
             ]);
         }
@@ -68,7 +70,7 @@ class RegisterWithEmailController extends Controller
         $deviceToken = DeviceToken::issueFor($uuid);
 
         return response()->json([
-            'uuid' => $uuid,
+            'uuid'         => $uuid,
             'device_token' => $deviceToken->token,
         ], 201);
     }

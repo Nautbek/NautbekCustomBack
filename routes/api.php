@@ -31,6 +31,7 @@ Route::post('/register', RegisterController::class);
 Route::post('/user_open', UserOpenController::class);
 Route::post('/user_feedback', UserFeedbackController::class);
 
+// TODO не используется
 // Email+пароль — см. план "Аккаунт по email". Уживается с анонимным /register выше:
 // клиент либо создаёт новый uuid прямо с реальными email/password (мандатор для новых
 // установок), либо подсовывает уже существующий локальный uuid, чтобы привязать email к
