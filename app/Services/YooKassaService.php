@@ -7,6 +7,7 @@ use App\Models\DonationPayment;
 use App\Services\YooKassa\YooKassaRequestLogger;
 use YooKassa\Client;
 use YooKassa\Common\Exceptions\ApiException;
+use YooKassa\Common\Exceptions\ExtensionNotFoundException;
 use YooKassa\Model\CurrencyCode;
 use YooKassa\Model\Payment\ConfirmationType;
 use YooKassa\Model\Payment\PaymentInterface;
@@ -46,6 +47,9 @@ class YooKassaService
         return $this->createPayment($payload, $idempotenceKey);
     }
 
+    /**
+     * @throws ExtensionNotFoundException
+     */
     public function createDonationPaymentWithToken(
         DonationPayment $payment,
         string $paymentToken,
@@ -65,6 +69,9 @@ class YooKassaService
         return $this->createPayment($payload, $idempotenceKey);
     }
 
+    /**
+     * @throws ExtensionNotFoundException
+     */
     public function createDonationSbpPayment(DonationPayment $payment, string $idempotenceKey): CreatePaymentResponse
     {
         $payload = [
@@ -123,7 +130,8 @@ class YooKassaService
      * Generic payment creation, used by the donation flow above and by any
      * module (MyCar, TripSplit, ...) that builds its own YooKassa payload.
      *
-     * @param  array<string, mixed>  $payload
+     * @param array<string, mixed> $payload
+     * @throws ExtensionNotFoundException
      */
     public function createPayment(array $payload, string $idempotenceKey): CreatePaymentResponse
     {
