@@ -55,6 +55,8 @@ RUN chown -R www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
+CMD php artisan migrate
+
 EXPOSE 9000
 
 CMD ["php-fpm"]
