@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', RegisterController::class);
 Route::post('/user_open', UserOpenController::class);
 Route::post('/user_feedback', UserFeedbackController::class);
-Route::get('/app_version', AppVersionController::class);
+Route::get('/app-version', AppVersionController::class);
 
 // TODO не используется
 // Email+пароль — см. план "Аккаунт по email". Уживается с анонимным /register выше:
