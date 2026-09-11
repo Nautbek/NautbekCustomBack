@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\UserFeedbackController;
 use App\Http\Controllers\Api\UserOpenController;
 use App\Http\Controllers\AppVersionController;
+use App\Http\Controllers\OneTimeCodeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,7 @@ Route::post('/register', RegisterController::class);
 Route::post('/user_open', UserOpenController::class);
 Route::post('/user_feedback', UserFeedbackController::class);
 Route::get('/app-version', AppVersionController::class);
+Route::get('/one_time_code', OneTimeCodeController::class)->middleware('throttle:5,1');
 
 // TODO не используется
 // Email+пароль — см. план "Аккаунт по email". Уживается с анонимным /register выше:
@@ -43,6 +45,9 @@ Route::post('/auth/register', RegisterWithEmailController::class);
 Route::post('/auth/login', LoginController::class)->middleware('throttle:5,1');
 Route::post('/auth/forgot-password', ForgotPasswordController::class)->middleware('throttle:5,1');
 Route::post('/auth/reset-password', ResetPasswordController::class)->middleware('throttle:10,1');
+
+//TODo роут для того, чтобы посылал код подтверждения по юзеру.
+//TODO нужен роут подтверждения кода. Если ок привязываем почту, если нет, ошибка.
 
 // Фидбек-чат: треды обращений + сообщения. Отдельно от /user_feedback выше,
 // которая остаётся каналом для activity-пингов (см. Modules/*/… и Helper).

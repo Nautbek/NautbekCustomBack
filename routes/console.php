@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\OneTimeCodeClearJob;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -8,3 +9,4 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('telescope:prune --hours=168')->daily();
+Schedule::job(OneTimeCodeClearJob::class)->everyMinute();
